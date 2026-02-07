@@ -1,0 +1,1722 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <!-- Primary Meta Tags -->
+  <title>Raman - Terminal Portfolio</title>
+  <meta name="title" content="Raman - Software Engineer & Business Analyst | Terminal Portfolio">
+  <meta name="description" content="Interactive terminal portfolio of Raman - Business Team at Octopus Energy, Computer Science Student. Specializing in Tier 3 support, SQL, Power BI, and full-stack development.">
+  <meta name="keywords" content="Raman Engineer, Software Developer, Business Analyst, Octopus Energy, Computer Science, Terminal Portfolio, SQL, Power BI, Python, Full Stack Developer, Wellington Developer">
+  <meta name="author" content="Raman">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://heyramanraman.github.io/">
+  <meta property="og:title" content="Raman - Software Engineer & Business Analyst | Terminal Portfolio">
+  <meta property="og:description" content="Interactive terminal portfolio showcasing expertise in Tier 3 support, data analytics, and software development. Currently at Octopus Energy.">
+  <meta property="og:image" content="https://heyramanraman.github.io/og-image.png">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://heyramanraman.github.io/">
+  <meta property="twitter:title" content="Raman - Software Engineer & Business Analyst">
+  <meta property="twitter:description" content="Interactive terminal portfolio showcasing expertise in Tier 3 support, data analytics, and software development.">
+  <meta property="twitter:image" content="https://heyramanraman.github.io/og-image.png">
+  <meta property="twitter:creator" content="@heyramanramanx">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://heyramanraman.github.io/">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=SF+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Raman",
+    "url": "https://heyramanraman.github.io",
+    "jobTitle": "Business Analyst & Software Developer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Octopus Energy"
+    },
+    "sameAs": [
+      "https://github.com/ramanengineer",
+      "https://twitter.com/heyramanramanx",
+      "https://www.instagram.com/heyramanraman/",
+      "https://open.spotify.com/user/315gsubf3hk7id74wvr6sa2ycqgi"
+    ],
+    "email": "hey@heyramanraman.github.io"
+  }
+  </script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0a0e17;
+      --bg-lighter: #131825;
+      --text: #00ff41;
+      --text-dim: #00aa2b;
+      --text-dimmer: #007a1f;
+      --blue: #00d9ff;
+      --cyan: #8be9fd;
+      --purple: #bd93f9;
+      --pink: #ff79c6;
+      --yellow: #f1fa8c;
+      --red: #ff5555;
+      --orange: #ffb86c;
+      --green: #50fa7b;
+      --green-dim: #3ad95f;
+      --spotify: #1DB954;
+      --instagram: #E1306C;
+      --twitter: #1DA1F2;
+    }
+
+    /* Terminal Loading Screen */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0a0e17 0%, #0f1419 50%, #0a0e17 100%);
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+      overflow: hidden;
+    }
+
+    #loading-screen::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        linear-gradient(90deg, transparent 0%, rgba(0, 255, 65, 0.03) 50%, transparent 100%);
+      animation: scanline 8s linear infinite;
+    }
+
+    @keyframes scanline {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    #loading-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loading-container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .loading-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .loading-logo {
+      font-size: 70px;
+      animation: logoFloat 3s ease-in-out infinite;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 30px rgba(0, 255, 65, 0.6));
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-15px) scale(1.05); }
+    }
+
+    .loading-title {
+      color: var(--cyan);
+      font-size: 24px;
+      font-weight: 700;
+      font-family: 'SF Mono', monospace;
+      margin-bottom: 10px;
+      text-shadow: 0 0 20px rgba(139, 233, 253, 0.8);
+      letter-spacing: 2px;
+    }
+
+    .loading-subtitle {
+      color: var(--green);
+      font-size: 14px;
+      font-family: 'SF Mono', monospace;
+      opacity: 0.8;
+      letter-spacing: 1px;
+    }
+
+    #phrase-box {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      margin: 30px 0;
+      background: rgba(0, 255, 65, 0.02);
+      border: 2px solid rgba(0, 255, 65, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 
+        0 0 30px rgba(0, 255, 65, 0.2),
+        inset 0 0 30px rgba(0, 255, 65, 0.05);
+    }
+
+    #phrase-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(10, 14, 23, 0.9), transparent);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    #phrase-box::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: linear-gradient(to top, rgba(10, 14, 23, 0.9), transparent);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    #phrases-container {
+      position: relative;
+      transition: transform 0.3s ease-out;
+    }
+
+    .loading-phrase {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      margin-bottom: 10px;
+      font-family: 'SF Mono', monospace;
+      font-size: 15px;
+      color: var(--green);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+
+    .loading-phrase.active {
+      opacity: 1;
+      transform: scale(1.05);
+      color: var(--cyan);
+      text-shadow: 0 0 10px rgba(139, 233, 253, 0.6);
+    }
+
+    .loading-phrase.completed {
+      opacity: 0.5;
+      color: var(--text-dim);
+    }
+
+    .phrase-check {
+      width: 24px;
+      height: 24px;
+      margin-right: 12px;
+      flex-shrink: 0;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.3s ease;
+    }
+
+    .phrase-check.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .phrase-check svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .phrase-spinner {
+      width: 16px;
+      height: 16px;
+      margin-right: 12px;
+      border: 2px solid rgba(0, 255, 65, 0.3);
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      flex-shrink: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .phrase-spinner.visible {
+      opacity: 1;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-footer {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .loading-progress {
+      color: var(--cyan);
+      font-family: 'SF Mono', monospace;
+      font-size: 13px;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(139, 233, 253, 0.4);
+    }
+
+    .progress-dots {
+      display: inline-block;
+      width: 20px;
+    }
+
+    .loading-bar-container {
+      width: 100%;
+      height: 6px;
+      background: rgba(0, 255, 65, 0.1);
+      border: 2px solid rgba(0, 255, 65, 0.3);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+    }
+
+    .loading-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green), var(--cyan), var(--green));
+      background-size: 200% 100%;
+      width: 0%;
+      animation: loadProgress 3s ease-in-out forwards, shimmer 1.5s linear infinite;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.8);
+    }
+
+    @keyframes loadProgress {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    body {
+      font-family: 'SF Mono', 'Courier Prime', 'Courier New', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+
+    /* Social Bar */
+    .social-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 14, 23, 0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 2px solid var(--green);
+      padding: 10px 20px;
+      z-index: 10000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 30px rgba(0, 255, 65, 0.2);
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .social-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s;
+    }
+
+    .social-btn:hover::before {
+      left: 100%;
+    }
+
+    .social-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .social-btn:hover svg {
+      transform: scale(1.15);
+    }
+
+    .social-btn.email {
+      background: #f59e0b;
+      color: #1a1a1a;
+    }
+
+    .social-btn.email:hover {
+      filter: brightness(1.2);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.7);
+    }
+
+    .social-btn.instagram {
+      background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
+      color: white;
+    }
+
+    .social-btn.instagram:hover {
+      filter: brightness(1.2);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(221, 42, 123, 0.7);
+    }
+
+    .social-btn.twitter {
+      background: #000000;
+      color: white;
+    }
+
+    .social-btn.twitter:hover {
+      filter: brightness(1.2);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+
+    .social-btn.spotify {
+      background: #1DB954;
+      color: white;
+    }
+
+    .social-btn.spotify:hover {
+      filter: brightness(1.2);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(29, 185, 84, 0.7);
+    }
+
+    .social-btn.github {
+      background: #2a2a2a;
+      color: white;
+    }
+
+    .social-btn.github:hover {
+      filter: brightness(1.3);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Matrix Rain Canvas */
+    #matrix-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    #matrix-canvas.active {
+      opacity: 1;
+    }
+
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 50%, rgba(0, 255, 65, 0.015) 51%);
+      background-size: 100% 4px;
+      pointer-events: none;
+      z-index: 9999;
+      animation: scan 8s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes scan {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
+
+    .crt {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9998;
+      background: radial-gradient(ellipse at center, transparent 0%, rgba(10, 14, 23, 0.5) 100%);
+    }
+
+    /* Matrix Mode Effects */
+    body.matrix-mode {
+      animation: glitch 0.3s infinite;
+      background: #000000;
+    }
+
+    @keyframes glitch {
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+    }
+
+    body.matrix-mode .line,
+    body.matrix-mode #input {
+      text-shadow: 
+        0 0 5px #00ff00,
+        0 0 10px #00ff00,
+        0 0 15px #00ff00;
+      animation: textFlicker 0.1s infinite;
+    }
+
+    @keyframes textFlicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.95; }
+    }
+
+    #terminal {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      padding: 90px 30px 30px 30px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      font-size: 15px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .line {
+      margin: 8px 0;
+      animation: fadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateX(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .prompt {
+      color: var(--cyan);
+      font-weight: 600;
+      text-shadow: 0 0 8px rgba(139, 233, 253, 0.4);
+    }
+
+    body.matrix-mode .prompt {
+      color: #00ff00;
+      animation: matrixPulse 1s ease-in-out infinite;
+    }
+
+    @keyframes matrixPulse {
+      0%, 100% {
+        color: #00ff00;
+        text-shadow: 0 0 10px #00ff00;
+      }
+      50% {
+        color: #00cc00;
+        text-shadow: 0 0 20px #00ff00;
+      }
+    }
+
+    .cmd {
+      color: var(--purple);
+      text-shadow: 0 0 5px rgba(189, 147, 249, 0.3);
+    }
+
+    .output {
+      margin: 15px 0 20px 0;
+      padding-left: 10px;
+    }
+
+    .ascii {
+      color: var(--text);
+      font-size: 10px;
+      line-height: 1.2;
+      margin: 20px 0;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .input-line {
+      display: flex;
+      align-items: center;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    #input {
+      flex-grow: 1;
+      min-width: 200px;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-family: 'SF Mono', 'Courier Prime', 'Courier New', monospace;
+      font-size: 15px;
+      caret-color: var(--green);
+      margin-left: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 18px;
+      background: var(--green);
+      animation: blink 1s infinite;
+      margin-left: 2px;
+      box-shadow: 0 0 8px rgba(80, 250, 123, 0.6);
+    }
+
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    .title {
+      color: var(--yellow);
+      font-weight: 700;
+      font-size: 16px;
+      margin: 20px 0 15px 0;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(241, 250, 140, 0.4);
+    }
+
+    .info {
+      margin: 12px 0;
+      padding-left: 20px;
+      position: relative;
+      word-break: break-word;
+      line-height: 1.8;
+    }
+
+    .info::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      text-shadow: 0 0 5px rgba(80, 250, 123, 0.5);
+    }
+
+    .key {
+      color: var(--cyan);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .value {
+      display: block;
+      padding-left: 0;
+    }
+
+    .link {
+      color: var(--cyan);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--cyan);
+      word-break: break-all;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-shadow: 0 0 5px rgba(139, 233, 253, 0.3);
+    }
+
+    .link:hover, .link:active {
+      color: var(--green);
+      border-bottom-color: var(--green);
+      text-shadow: 0 0 8px rgba(80, 250, 123, 0.6);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 12px;
+      margin: 6px 6px 6px 0;
+      background: rgba(0, 255, 65, 0.12);
+      border: 1px solid var(--green);
+      border-radius: 5px;
+      font-size: 12px;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 5px rgba(0, 255, 65, 0.2);
+    }
+
+    .tag:hover {
+      background: rgba(0, 255, 65, 0.2);
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .error {
+      color: var(--red);
+      padding: 15px;
+      border: 1px solid var(--red);
+      border-radius: 6px;
+      background: rgba(255, 85, 85, 0.1);
+      margin: 15px 0;
+      word-break: break-word;
+      line-height: 1.8;
+      box-shadow: 0 0 15px rgba(255, 85, 85, 0.2);
+    }
+
+    .success {
+      color: var(--green);
+      padding: 15px;
+      border: 1px solid var(--green);
+      border-radius: 6px;
+      background: rgba(80, 250, 123, 0.1);
+      margin: 15px 0;
+      line-height: 1.8;
+      box-shadow: 0 0 15px rgba(80, 250, 123, 0.2);
+    }
+
+    .cmd-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px 20px;
+      margin: 15px 0;
+    }
+
+    .cmd-name {
+      color: var(--purple);
+      font-weight: 600;
+      white-space: nowrap;
+      text-shadow: 0 0 5px rgba(189, 147, 249, 0.3);
+    }
+
+    .cmd-desc {
+      color: var(--text-dim);
+      word-break: break-word;
+    }
+
+    .item {
+      margin: 15px 0;
+      padding-left: 25px;
+      position: relative;
+      line-height: 1.8;
+      word-break: break-word;
+    }
+
+    .item::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      top: 0;
+      text-shadow: 0 0 5px rgba(80, 250, 123, 0.5);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      margin: 6px 0 6px 10px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-current {
+      background: rgba(80, 250, 123, 0.2);
+      color: var(--green);
+      border: 1px solid var(--green);
+      box-shadow: 0 0 10px rgba(80, 250, 123, 0.3);
+    }
+
+    .badge-progress {
+      background: rgba(255, 184, 108, 0.2);
+      color: var(--orange);
+      border: 1px solid var(--orange);
+      box-shadow: 0 0 10px rgba(255, 184, 108, 0.3);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(80, 250, 123, 0.3); }
+      50% { box-shadow: 0 0 20px rgba(80, 250, 123, 0.6); }
+    }
+
+    .card {
+      background: rgba(0, 255, 65, 0.04);
+      border: 1px solid var(--green-dim);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 18px 0;
+      line-height: 1.8;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+    }
+
+    .card:hover {
+      background: rgba(0, 255, 65, 0.06);
+      border-color: var(--green);
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .card-title {
+      color: var(--yellow);
+      font-weight: 600;
+      margin-bottom: 12px;
+      line-height: 1.6;
+      word-break: break-word;
+      text-shadow: 0 0 10px rgba(241, 250, 140, 0.3);
+    }
+
+    .card-meta {
+      color: var(--cyan);
+      font-size: 12px;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .card-desc {
+      color: var(--text);
+      margin-bottom: 15px;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--green);
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(80, 250, 123, 0.5);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--green-dim);
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .loading-logo {
+        font-size: 50px;
+      }
+
+      .loading-title {
+        font-size: 18px;
+      }
+
+      .loading-subtitle {
+        font-size: 12px;
+      }
+
+      #phrase-box {
+        height: 180px;
+        padding: 15px;
+      }
+
+      .loading-phrase {
+        font-size: 13px;
+        height: 35px;
+      }
+
+      .social-bar {
+        padding: 8px 10px;
+        gap: 8px;
+      }
+
+      .social-btn {
+        padding: 12px 16px;
+        font-size: 0;
+        gap: 0;
+        min-width: 48px;
+        justify-content: center;
+      }
+
+      .social-btn svg {
+        width: 22px;
+        height: 22px;
+        margin: 0;
+      }
+
+      .social-btn span {
+        display: none;
+      }
+
+      #terminal {
+        padding: 70px 15px 20px 15px;
+        font-size: 13px;
+      }
+
+      .ascii {
+        font-size: 6px;
+        line-height: 1.1;
+      }
+
+      .title {
+        font-size: 15px;
+      }
+
+      .cmd-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .card {
+        padding: 15px;
+      }
+
+      #input {
+        font-size: 13px;
+        min-width: 150px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .loading-logo {
+        font-size: 40px;
+      }
+
+      .loading-title {
+        font-size: 16px;
+      }
+
+      #phrase-box {
+        height: 160px;
+      }
+
+      .loading-phrase {
+        font-size: 12px;
+        height: 32px;
+      }
+
+      #terminal {
+        padding: 65px 12px 15px 12px;
+        font-size: 12px;
+      }
+
+      .ascii {
+        font-size: 5px;
+      }
+
+      .social-bar {
+        padding: 6px 8px;
+        gap: 6px;
+      }
+
+      .social-btn {
+        padding: 10px 14px;
+        min-width: 44px;
+      }
+
+      .social-btn svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .prompt, .cmd, .cursor {
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    a, .link {
+      min-height: 44px;
+      display: inline-block;
+      line-height: 1.6;
+      padding: 6px 0;
+    }
+
+    @media (max-width: 768px) {
+      a, .link {
+        padding: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Terminal Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-container">
+      <div class="loading-header">
+        <div class="loading-logo">👾</div>
+        <div class="loading-title">heyramanraman.github.io</div>
+        <div class="loading-subtitle">Initializing Terminal...</div>
+      </div>
+
+      <div id="phrase-box">
+        <div id="phrases-container"></div>
+      </div>
+
+      <div class="loading-footer">
+        <div class="loading-progress">
+          <span id="progress-text">Loading</span><span class="progress-dots"></span>
+        </div>
+        <div class="loading-bar-container">
+          <div class="loading-bar-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Social Bar -->
+  <div class="social-bar">
+    <a href="/cdn-cgi/l/email-protection#741c110d34061519151a5a04151311" class="social-btn email" aria-label="Email" title="Email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+      </svg>
+      <span>Email</span>
+    </a>
+    <a href="https://www.instagram.com/heyramanraman/" target="_blank" rel="noopener noreferrer" class="social-btn instagram" aria-label="Instagram" title="Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+      </svg>
+      <span>Instagram</span>
+    </a>
+    <a href="https://twitter.com/heyramanramanx" target="_blank" rel="noopener noreferrer" class="social-btn twitter" aria-label="Twitter" title="Twitter">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+      <span>Twitter</span>
+    </a>
+    <a href="https://open.spotify.com/user/315gsubf3hk7id74wvr6sa2ycqgi" target="_blank" rel="noopener noreferrer" class="social-btn spotify" aria-label="Spotify" title="Spotify">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+      </svg>
+      <span>Spotify</span>
+    </a>
+    <a href="https://github.com/ramanengineer" target="_blank" rel="noopener noreferrer" class="social-btn github" aria-label="GitHub" title="GitHub">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+      </svg>
+      <span>GitHub</span>
+    </a>
+  </div>
+
+  <canvas id="matrix-canvas"></canvas>
+  <div class="scanlines"></div>
+  <div class="crt"></div>
+  <div id="terminal"></div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Terminal Loading Animation
+    const phrases = [
+      "Booting terminal kernel",
+      "Loading system modules",
+      "Initializing command shell",
+      "Compiling portfolio data",
+      "Establishing secure connection",
+      "Mounting file systems",
+      "Parsing configuration files",
+      "Allocating memory buffers",
+      "Starting background processes",
+      "Initializing network stack",
+      "Loading user preferences",
+      "Calibrating quantum flux",
+      "Ready for input"
+    ];
+
+    function shuffleArray(array) {
+      const newArray = [...array];
+      for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+      }
+      return newArray;
+    }
+
+    const shuffledPhrases = shuffleArray(phrases);
+    const phrasesContainer = document.getElementById('phrases-container');
+    const progressText = document.getElementById('progress-text');
+    const progressDots = document.querySelector('.progress-dots');
+
+    // Create phrase elements
+    shuffledPhrases.forEach((phrase, index) => {
+      const phraseEl = document.createElement('div');
+      phraseEl.className = 'loading-phrase';
+      phraseEl.innerHTML = `
+        <div class="phrase-spinner"></div>
+        <div class="phrase-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <span>${phrase}</span>
+      `;
+      phrasesContainer.appendChild(phraseEl);
+    });
+
+    // Animate loading
+    let currentPhrase = 0;
+    let dotCount = 0;
+    const phraseElements = document.querySelectorAll('.loading-phrase');
+
+    function animatePhrase() {
+      if (currentPhrase >= phraseElements.length) {
+        setTimeout(() => {
+          document.getElementById('loading-screen').classList.add('hidden');
+        }, 500);
+        return;
+      }
+
+      const current = phraseElements[currentPhrase];
+      const spinner = current.querySelector('.phrase-spinner');
+      const check = current.querySelector('.phrase-check');
+
+      // Activate current phrase
+      current.classList.add('active');
+      spinner.classList.add('visible');
+
+      // Scroll container
+      const offset = Math.max(0, (currentPhrase - 2) * 50);
+      phrasesContainer.style.transform = `translateY(-${offset}px)`;
+
+      // Complete after delay
+      setTimeout(() => {
+        spinner.classList.remove('visible');
+        check.classList.add('visible');
+        current.classList.remove('active');
+        current.classList.add('completed');
+        currentPhrase++;
+        
+        if (currentPhrase < phraseElements.length) {
+          animatePhrase();
+        } else {
+          progressText.textContent = 'Complete';
+          setTimeout(() => {
+            document.getElementById('loading-screen').classList.add('hidden');
+          }, 500);
+        }
+      }, 300 + Math.random() * 200);
+    }
+
+    // Animate dots
+    setInterval(() => {
+      dotCount = (dotCount + 1) % 4;
+      progressDots.textContent = '.'.repeat(dotCount);
+    }, 400);
+
+    // Start animation after a brief delay
+    setTimeout(() => {
+      animatePhrase();
+    }, 500);
+
+    const term = document.getElementById('terminal');
+    let currentInput;
+    let history = [];
+    let historyIndex = 0;
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    // Matrix Rain Effect
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const characters = 'ｦｱｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ012345789ZXCVBNMASDFGHJKLQWERTYUIOP';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.random() * -100;
+    }
+
+    let matrixInterval;
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#0F0';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    function init() {
+      const asciiArt = isMobile ? 
+        `<div class="ascii" style="text-align: center; color: var(--cyan); text-shadow: 0 0 20px rgba(139,233,253,0.7); font-size: 6px; margin: 20px 0;">
+    <span style="color: var(--cyan);">╔═══════════════════════════════════════════════╗</span>
+    <span style="color: var(--cyan);">║</span>                                               <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>   <span style="color: var(--green);">██████╗  █████╗ ███╗   ███╗ █████╗ ███╗   ██╗</span>   <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>   <span style="color: var(--green);">██╔══██╗██╔══██╗████╗ ████║██╔══██╗████╗  ██║</span>   <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>   <span style="color: var(--green);">██████╔╝███████║██╔████╔██║███████║██╔██╗ ██║</span>   <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>   <span style="color: var(--green);">██╔══██╗██╔══██║██║╚██╔╝██║██╔══██║██║╚██╗██║</span>   <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>   <span style="color: var(--green);">██║  ██║██║  ██║██║ ╚═╝ ██║██║  ██║██║ ╚████║</span>   <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>   <span style="color: var(--green);">╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝</span>   <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>                                               <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span> <span style="color: var(--yellow); font-weight: bold;">heyramanraman.github.io</span>                              <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span> <span style="color: var(--green);">Business Team @ Octopus Energy</span>              <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span> <span style="color: var(--purple);">Computer Science Student</span>                   <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">╚═══════════════════════════════════════════════╝</span>
+</div>` :
+        `<div class="ascii" style="text-align: center; color: var(--cyan); text-shadow: 0 0 20px rgba(139,233,253,0.7); font-size: 9px; margin: 25px 0;">
+    <span style="color: var(--cyan);">╔══════════════════════════════════════════════════════════════════════════╗</span>
+    <span style="color: var(--cyan);">║</span>                                                                          <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>     <span style="color: var(--green);">██████╗  █████╗ ███╗   ███╗ █████╗ ███╗   ██╗</span>                     <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>     <span style="color: var(--green);">██╔══██╗██╔══██╗████╗ ████║██╔══██╗████╗  ██║</span>                     <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>     <span style="color: var(--green);">██████╔╝███████║██╔████╔██║███████║██╔██╗ ██║</span>                     <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>     <span style="color: var(--green);">██╔══██╗██╔══██║██║╚██╔╝██║██╔══██║██║╚██╗██║</span>                     <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>     <span style="color: var(--green);">██║  ██║██║  ██║██║ ╚═╝ ██║██║  ██║██║ ╚████║</span>                     <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>     <span style="color: var(--green);">╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝</span>                     <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>                                                                          <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>  <span style="color: var(--yellow); font-weight: bold; font-size: 17px;">heyramanraman.github.io</span>                                                  <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">║</span>  <span style="color: var(--green);">Business Team @ Octopus Energy</span> <span style="color: var(--text-dim);">|</span> <span style="color: var(--purple);">CS Student</span>                      <span style="color: var(--cyan);">║</span>
+    <span style="color: var(--cyan);">╚══════════════════════════════════════════════════════════════════════════╝</span>
+</div>`;
+
+      addLine(asciiArt);
+      
+      addLine(`<div class="success" style="background: linear-gradient(135deg, rgba(80,250,123,0.12) 0%, rgba(0,217,255,0.12) 100%);">
+<span style="color: var(--green); text-shadow: 0 0 8px rgba(80,250,123,0.6);">✓</span> <span style="color: var(--cyan);">Terminal initialized</span>
+<span style="color: var(--green); text-shadow: 0 0 8px rgba(80,250,123,0.6);">✓</span> <span style="color: var(--purple);">Connection established</span>
+<span style="color: var(--green); text-shadow: 0 0 8px rgba(80,250,123,0.6);">✓</span> <span style="color: var(--pink);">Ready for commands</span>
+</div>`);
+      addLine(`<div style="color: var(--text); margin: 15px 0;">Welcome to my <span style="color: var(--cyan); font-weight: 600; text-shadow: 0 0 8px rgba(139,233,253,0.4);">terminal</span> portfolio.</div>`);
+      addLine(`<div style="color: var(--text);">Type <span style="color: var(--yellow); font-weight: 600; padding: 3px 10px; background: rgba(241,250,140,0.15); border-radius: 4px; text-shadow: 0 0 8px rgba(241,250,140,0.4);">'help'</span> to see available commands.</div>`);
+      addLine(`<div style="color: var(--purple); margin-top: 15px;">💡 <span style="color: var(--text-dim);">Hint: Start with</span> <span style="color: var(--pink); font-weight: 600;">'whoami'</span> <span style="color: var(--text-dim);">or</span> <span style="color: var(--cyan); font-weight: 600;">'about'</span></div>`);
+      
+      createInput();
+    }
+
+    function createInput() {
+      const inputLine = document.createElement('div');
+      inputLine.className = 'input-line';
+      inputLine.innerHTML = '<span class="prompt">visitor@terminal:~$</span><input type="text" id="input" autocomplete="off" autofocus inputmode="text"><span class="cursor"></span>';
+      term.appendChild(inputLine);
+      
+      currentInput = document.getElementById('input');
+      
+      if (!isMobile) {
+        currentInput.focus();
+      }
+      
+      currentInput.addEventListener('keydown', handleKey);
+      currentInput.addEventListener('focus', () => {
+        if (isMobile) {
+          setTimeout(() => {
+            term.scrollTop = term.scrollHeight;
+          }, 300);
+        }
+      });
+      
+      term.scrollTop = term.scrollHeight;
+    }
+
+    function handleKey(e) {
+      if (e.key === 'Enter') {
+        const cmd = currentInput.value.trim();
+        term.removeChild(term.lastChild);
+        if (cmd) {
+          addLine(`<span class="prompt">visitor@terminal:~$</span> <span class="cmd">${escapeHtml(cmd)}</span>`);
+          executeCmd(cmd.toLowerCase());
+          history.push(cmd);
+          historyIndex = history.length;
+        }
+        createInput();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (historyIndex > 0) {
+          historyIndex--;
+          currentInput.value = history[historyIndex];
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (historyIndex < history.length - 1) {
+          historyIndex++;
+          currentInput.value = history[historyIndex];
+        } else {
+          historyIndex = history.length;
+          currentInput.value = '';
+        }
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        const cmds = ['help', 'whoami', 'about', 'skills', 'experience', 'education', 'projects', 'dev', 'achievements', 'contact', 'socials', 'clear', 'matrix'];
+        const matches = cmds.filter(c => c.startsWith(currentInput.value));
+        if (matches.length === 1) currentInput.value = matches[0];
+      } else if (e.ctrlKey && e.key === 'l') {
+        e.preventDefault();
+        clearTerm();
+      }
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function addLine(html) {
+      const line = document.createElement('div');
+      line.className = 'line';
+      line.innerHTML = html;
+      const inputLine = term.querySelector('.input-line');
+      if (inputLine) {
+        term.insertBefore(line, inputLine);
+      } else {
+        term.appendChild(line);
+      }
+      term.scrollTop = term.scrollHeight;
+    }
+
+    function executeCmd(cmd) {
+      const [main, ...args] = cmd.split(' ');
+      
+      const commands = {
+        'help': showHelp,
+        'whoami': showWhoami,
+        'about': showAbout,
+        'skills': showSkills,
+        'experience': showExperience,
+        'education': showEducation,
+        'projects': showProjects,
+        'dev': showDev,
+        'achievements': showAchievements,
+        'contact': showContact,
+        'socials': showSocials,
+        'clear': clearTerm,
+        'ls': () => addLine('<div class="output">about.txt  skills.json  experience.log  projects/  contact.md</div>'),
+        'pwd': () => addLine('<div class="output">/home/terminal/portfolio</div>'),
+        'date': () => addLine(`<div class="output">${new Date().toString()}</div>`),
+        'matrix': toggleMatrix,
+        'sudo': () => addLine('<div class="error">🔒 Permission denied. Nice try! 😏</div>'),
+        'exit': () => addLine('<div class="error">❌ Cannot exit. You\'re here forever! 😈</div>'),
+        'hack': () => addLine('<div class="success">🎮 HACKING...<br>█████████ 100%<br>✓ Just kidding! 😄</div>')
+      };
+
+      if (commands[main]) {
+        commands[main]();
+      } else if (main) {
+        addLine(`<div class="error">Command not found: ${escapeHtml(main)}<br>Type 'help' for available commands.</div>`);
+      }
+    }
+
+    function showHelp() {
+      addLine(`<div class="output">
+        <div class="title">Available Commands</div>
+        <div class="cmd-grid">
+          <span class="cmd-name">help</span><span class="cmd-desc">Show this help</span>
+          <span class="cmd-name">whoami</span><span class="cmd-desc">Display info</span>
+          <span class="cmd-name">about</span><span class="cmd-desc">About me</span>
+          <span class="cmd-name">skills</span><span class="cmd-desc">Technical skills</span>
+          <span class="cmd-name">experience</span><span class="cmd-desc">Work history</span>
+          <span class="cmd-name">education</span><span class="cmd-desc">Education</span>
+          <span class="cmd-name">projects</span><span class="cmd-desc">Completed projects</span>
+          <span class="cmd-name">dev</span><span class="cmd-desc">In development</span>
+          <span class="cmd-name">achievements</span><span class="cmd-desc">Achievements</span>
+          <span class="cmd-name">contact</span><span class="cmd-desc">Contact info</span>
+          <span class="cmd-name">socials</span><span class="cmd-desc">Social links</span>
+          <span class="cmd-name">clear</span><span class="cmd-desc">Clear screen</span>
+          <span class="cmd-name">matrix</span><span class="cmd-desc">🟢 Matrix mode toggle</span>
+        </div>
+        <div style="margin-top: 20px; color: var(--text-dim); font-size: ${isMobile ? '12px' : '13px'};">💡 ${isMobile ? 'TAB=autocomplete, UP/DOWN=history' : 'TAB=autocomplete, UP/DOWN=history, CTRL+L=clear'}</div>
+      </div>`);
+    }
+
+    function showWhoami() {
+      addLine(`<div class="output">
+        <div class="title" style="color: var(--cyan); text-shadow: 0 0 15px rgba(139,233,253,0.6);">$ whoami</div>
+        <div class="info"><span class="key" style="color: var(--purple);">Name:</span> <span class="value" style="color: var(--pink); font-weight: 600;">Raman</span></div>
+        <div class="info"><span class="key" style="color: var(--purple);">Title:</span> <span class="value" style="color: var(--cyan);">Business Team</span></div>
+        <div class="info"><span class="key" style="color: var(--purple);">Company:</span> <span class="value" style="color: var(--green);">Octopus Energy ⚡</span></div>
+        <div class="info"><span class="key" style="color: var(--purple);">Email:</span> <span class="value"><a href="mailto:hey@heyramanraman.github.io" class="link" style="color: var(--yellow);">hey@heyramanraman.github.io</a></span></div>
+        <div class="info"><span class="key" style="color: var(--purple);">Location:</span> <span class="value" style="color: var(--orange);">Earth 🌍</span></div>
+        <div class="info"><span class="key" style="color: var(--purple);">Education:</span> <span class="value" style="color: var(--cyan);">BSc Computer Science @ Massey </span></div>
+        <div class="info"><span class="key" style="color: var(--purple);">Status:</span> <span class="value" style="color: var(--green);">● Online & Available</span></div>
+      </div>`);
+    }
+
+    function showAbout() {
+      addLine(`<div class="output">
+        <div class="title" style="color: var(--pink); text-shadow: 0 0 15px rgba(255,121,198,0.6);">$ ramanabout.txt</div>
+        
+        <div style="margin: 20px 0; padding: 15px; background: linear-gradient(135deg, rgba(189,147,249,0.08) 0%, rgba(139,233,253,0.08) 100%); border-left: 3px solid var(--purple); border-radius: 6px;">
+          <div style="color: var(--yellow); font-weight: 600; margin-bottom: 12px;">👨‍💻 Professional Overview</div>
+          <div style="color: var(--text); line-height: 1.8;">
+            Working on the <span style="color: var(--cyan);">Business Team</span> at <span style="color: var(--green); font-weight: 600;">Octopus Energy</span> 
+            with strong <span style="color: var(--pink);">Tier 3 troubleshooting expertise</span> across mobile apps, billing systems, 
+            and complex API-driven workflows. Supporting over <span style="color: var(--orange); font-weight: 600;">120,000+ customers</span>.
+          </div>
+        </div>
+
+        <div style="margin: 20px 0; padding: 15px; background: linear-gradient(135deg, rgba(80,250,123,0.08) 0%, rgba(241,250,140,0.08) 100%); border-left: 3px solid var(--green); border-radius: 6px;">
+          <div style="color: var(--green); font-weight: 600; margin-bottom: 12px;">🎯 Core Strengths</div>
+          <div style="color: var(--text); line-height: 1.8;">
+            I bring <span style="color: var(--pink);">high adjustability</span>, <span style="color: var(--cyan);">exceptional communication</span>, 
+            and a <span style="color: var(--yellow);">continuous improvement mindset</span>.
+          </div>
+        </div>
+
+        <div style="margin: 20px 0; padding: 15px; background: linear-gradient(135deg, rgba(0,217,255,0.08) 0%, rgba(255,121,198,0.08) 100%); border-left: 3px solid var(--cyan); border-radius: 6px;">
+          <div style="color: var(--cyan); font-weight: 600; margin-bottom: 12px;">🎓 Academic Journey</div>
+          <div style="color: var(--text); line-height: 1.8;">
+            Currently pursuing <span style="color: var(--yellow); font-weight: 600;">Computer Science</span> at 
+            <span style="color: var(--green);">Massey</span>.
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; padding: 12px; background: rgba(0,255,65,0.1); border: 1px dashed var(--green); border-radius: 6px; text-align: center;">
+          <div style="color: var(--green); font-size: ${isMobile ? '12px' : '13px'};">
+            💡 Type <span style="color: var(--cyan); font-weight: 600;">'experience'</span> 
+            or <span style="color: var(--pink); font-weight: 600;">'projects'</span>!
+          </div>
+        </div>
+      </div>`);
+    }
+
+    function showSkills() {
+      addLine(`<div class="output">
+        <div class="title">$ ls skills/</div>
+        <div style="margin: 15px 0;"><strong>Technical:</strong></div>
+        <div>
+          <span class="tag">SQL</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">Python</span>
+          <span class="tag">Java</span>
+          <span class="tag">.NET</span>
+          <span class="tag">AWS</span>
+          <span class="tag">APIs</span>
+          <span class="tag">ML</span>
+          <span class="tag">Salesforce</span>
+          <span class="tag">JIRA</span>
+          <span class="tag">Git</span>
+        </div>
+        <div style="margin: 25px 0 15px 0;"><strong>Soft Skills:</strong></div>
+        <div>
+          <span class="tag">Tier 3 Support</span>
+          <span class="tag">Customer Empathy</span>
+          <span class="tag">Technical Writing</span>
+          <span class="tag">Process Optimization</span>
+        </div>
+      </div>`);
+    }
+
+    function showExperience() {
+      addLine(`<div class="output">
+        <div class="title" style="color: var(--orange); text-shadow: 0 0 15px rgba(255,184,108,0.6);">$ ramanexperience.log</div>
+        <div class="card" style="background: linear-gradient(135deg, rgba(80,250,123,0.08) 0%, rgba(0,217,255,0.12) 100%); border: 2px solid var(--green);">
+          <div class="card-title" style="color: var(--yellow);">
+            ⚡ Business Team @ Octopus Energy 
+            <span class="badge badge-current" style="animation: pulse 2s infinite;">CURRENT</span>
+          </div>
+          <div class="card-meta" style="color: var(--cyan); font-weight: 600;">
+            📍 2023 – Present | 120,000+ Customers
+          </div>
+          <div class="card-desc">
+            <div style="background: rgba(0,217,255,0.1); padding: 12px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid var(--cyan);">
+              <div style="color: var(--yellow); font-weight: 600; margin-bottom: 12px;">🎯 Core Responsibilities:</div>
+              
+              <div class="item" style="color: var(--text);">
+                <span style="color: var(--cyan);">Tier 3 Support:</span> Advanced troubleshooting achieving 
+                <span style="color: var(--green); font-weight: 700;">85% first-contact resolution</span>.
+              </div>
+              
+              <div class="item" style="color: var(--text);">
+                <span style="color: var(--purple);">Data-Driven:</span> Using 
+                <span style="color: var(--cyan); font-weight: 600;">SQL</span> and 
+                <span style="color: var(--green); font-weight: 600;">Power BI</span>, 
+                <span style="color: var(--green); font-weight: 700;">reduced recurring issues by 25%</span>.
+              </div>
+              
+              <div class="item" style="color: var(--text);">
+                <span style="color: var(--pink);">Documentation:</span> Precise bug tracking and escalation.
+              </div>
+            </div>
+
+            <div style="background: rgba(241,250,140,0.1); padding: 12px; border-radius: 6px; border-left: 3px solid var(--yellow);">
+              <div style="color: var(--yellow); font-weight: 600; margin-bottom: 12px;">🏆 Key Achievements:</div>
+              <div class="item" style="color: var(--green);">85% first-contact resolution</div>
+              <div class="item" style="color: var(--cyan);">25% reduction in issues</div>
+              <div class="item" style="color: var(--pink);">40% increase in self-service</div>
+            </div>
+          </div>
+          <div style="margin-top: 15px;">
+            <span class="tag" style="border-color: var(--cyan); color: var(--cyan);">Tier 3</span>
+            <span class="tag" style="border-color: var(--purple); color: var(--purple);">SQL</span>
+            <span class="tag" style="border-color: var(--green); color: var(--green);">Power BI</span>
+            <span class="tag" style="border-color: var(--pink); color: var(--pink);">APIs</span>
+            <span class="tag" style="border-color: var(--orange); color: var(--orange);">Salesforce</span>
+          </div>
+        </div>
+      </div>`);
+    }
+
+    function showEducation() {
+      addLine(`<div class="output">
+        <div class="title" style="color: var(--green); text-shadow: 0 0 15px rgba(80,250,123,0.6);">$ ramaneducation.txt</div>
+        
+        <div class="card" style="background: linear-gradient(135deg, rgba(139,233,253,0.08) 0%, rgba(189,147,249,0.12) 100%); border: 2px solid var(--cyan);">
+          <div class="card-title" style="color: var(--cyan);">
+            💻 BSc Computer Science
+            <span class="badge badge-progress" style="animation: pulse 2s infinite;">IN PROGRESS</span>
+          </div>
+          <div class="card-meta" style="color: var(--purple);">
+            🏫 Massey | Currently Enrolled
+          </div>
+          <div class="card-desc">
+            <div style="margin: 15px 0; padding: 12px; background: rgba(189,147,249,0.12); border-radius: 6px;">
+              <div style="color: var(--yellow); font-weight: 600; margin-bottom: 12px;">🎯 Focus Areas:</div>
+              <div class="item" style="color: var(--cyan);">Software Development</div>
+              <div class="item" style="color: var(--green);">Algorithms</div>
+              <div class="item" style="color: var(--purple);">Database & SQL</div>
+              <div class="item" style="color: var(--pink);">Web Development</div>
+              <div class="item" style="color: var(--orange);">OOP</div>
+              <div class="item" style="color: var(--yellow);">Cloud (AWS)</div>
+            </div>
+          </div>
+          <div style="margin-top: 12px;">
+            <span class="tag" style="border-color: var(--cyan); color: var(--cyan);">.NET</span>
+            <span class="tag" style="border-color: var(--green); color: var(--green);">Java</span>
+            <span class="tag" style="border-color: var(--purple); color: var(--purple);">SQL</span>
+            <span class="tag" style="border-color: var(--orange); color: var(--orange);">AWS</span>
+            <span class="tag" style="border-color: var(--pink); color: var(--pink);">Python</span>
+          </div>
+        </div>
+      </div>`);
+    }
+
+    function showProjects() {
+      addLine(`<div class="output">
+        <div class="title" style="color: var(--purple); text-shadow: 0 0 15px rgba(189,147,249,0.6);">$ ls projects/</div>
+        
+        <div class="card" style="background: linear-gradient(135deg, rgba(241,250,140,0.12) 0%, rgba(255,121,198,0.12) 100%); border: 2px solid var(--yellow);">
+          <div class="card-title" style="color: var(--yellow);">
+            ✨ populatesnippets.com
+            <span class="badge badge-current" style="background: rgba(241,250,140,0.3); color: var(--yellow); border-color: var(--yellow);">RECENT</span>
+          </div>
+          <div class="card-desc" style="color: var(--text);">
+            Developer tool for code snippets. Streamlines development workflow.
+          </div>
+          <div style="margin-top: 15px;">
+            <a href="https://populatesnippets.com" target="_blank" rel="noopener noreferrer" class="link" style="color: var(--cyan); padding: 8px 15px; background: rgba(0,217,255,0.15); border-radius: 5px; text-decoration: none; border: 1px solid var(--cyan); display: inline-block;">
+              🔗 Visit Site
+            </a>
+          </div>
+          <div style="margin-top: 12px;">
+            <span class="tag" style="border-color: var(--cyan); color: var(--cyan);">JavaScript</span>
+            <span class="tag" style="border-color: var(--green); color: var(--green);">React</span>
+          </div>
+        </div>
+
+        <div class="card" style="border: 2px solid var(--cyan);">
+          <div class="card-title" style="color: var(--cyan);">📊 Analytics Dashboard</div>
+          <div class="card-desc">Power BI dashboard. 25% issue reduction.</div>
+          <div><span class="tag">SQL</span> <span class="tag">Power BI</span></div>
+        </div>
+        
+        <div class="card" style="border: 2px solid var(--green);">
+          <div class="card-title" style="color: var(--green);">📚 Knowledge Base</div>
+          <div class="card-desc">40% self-service improvement.</div>
+          <div><span class="tag">Documentation</span> <span class="tag">Salesforce</span></div>
+        </div>
+      </div>`);
+    }
+
+    function showDev() {
+      addLine(`<div class="output">
+        <div class="title">$ ls dev-projects/</div>
+        <div class="card">
+          <div class="card-title">🤖 AI Support Assistant <span class="badge badge-progress">BUILDING</span></div>
+          <div class="card-desc">ML model for ticket prediction</div>
+          <div><span class="tag">Python</span> <span class="tag">ML</span> <span class="tag">NLP</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title">📱 App Health Monitor <span class="badge badge-progress">PLANNING</span></div>
+          <div class="card-desc">Automated API monitoring</div>
+          <div><span class="tag">AWS</span> <span class="tag">APIs</span></div>
+        </div>
+      </div>`);
+    }
+
+    function showAchievements() {
+      addLine(`<div class="output">
+        <div class="title">$ ramanachievements.txt</div>
+        <div class="card">
+          <div class="card-title">🏆 85% First Contact Resolution</div>
+          <div class="card-desc">Above team average</div>
+        </div>
+        <div class="card">
+          <div class="card-title">📉 25% Issue Reduction</div>
+          <div class="card-desc">Cross-functional initiative</div>
+        </div>
+        <div class="card">
+          <div class="card-title">👥 Team Training</div>
+          <div class="card-desc">Empowered Tier 1/2 teams</div>
+        </div>
+      </div>`);
+    }
+
+    function showContact() {
+      addLine(`<div class="output">
+        <div class="title" style="color: var(--pink); text-shadow: 0 0 15px rgba(255,121,198,0.6);">$ ramancontact.md</div>
+        <div class="info"><span class="key" style="color: var(--cyan);">📧 Email:</span> <span class="value"><a href="mailto:hey@heyramanraman.github.io" class="link" style="color: var(--yellow);">hey@heyramanraman.github.io</a></span></div>
+        <div class="info"><span class="key" style="color: var(--purple);">🌍 Location:</span> <span class="value" style="color: var(--orange);">Earth 🌍</span></div>
+      </div>`);
+    }
+
+    function showSocials() {
+      addLine(`<div class="output">
+        <div class="title" style="color: var(--orange); text-shadow: 0 0 15px rgba(255,184,108,0.6);">$ ramansocials.json</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(${isMobile ? '140px' : '200px'}, 1fr)); gap: 12px; margin-top: 20px;">
+          <a href="https://github.com/ramanengineer" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+            <div style="padding: ${isMobile ? '14px' : '18px'}; background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%); border: 2px solid var(--green); border-radius: 8px; text-align: center; transition: all 0.3s; cursor: pointer;">
+              <div style="font-size: ${isMobile ? '28px' : '36px'}; margin-bottom: 10px;">💻</div>
+              <div style="color: var(--green); font-weight: 600; font-size: ${isMobile ? '13px' : '15px'};">GitHub</div>
+            </div>
+          </a>
+          <a href="https://twitter.com/heyramanramanx" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+            <div style="padding: ${isMobile ? '14px' : '18px'}; background: linear-gradient(135deg, rgba(29,161,242,0.12) 0%, rgba(29,161,242,0.06) 100%); border: 2px solid #1DA1F2; border-radius: 8px; text-align: center; transition: all 0.3s; cursor: pointer;">
+              <div style="font-size: ${isMobile ? '28px' : '36px'}; margin-bottom: 10px;">🐦</div>
+              <div style="color: #1DA1F2; font-weight: 600; font-size: ${isMobile ? '13px' : '15px'};">Twitter</div>
+            </div>
+          </a>
+          <a href="https://www.instagram.com/heyramanraman/" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+            <div style="padding: ${isMobile ? '14px' : '18px'}; background: linear-gradient(135deg, rgba(225,48,108,0.12) 0%, rgba(225,48,108,0.06) 100%); border: 2px solid #E1306C; border-radius: 8px; text-align: center; transition: all 0.3s; cursor: pointer;">
+              <div style="font-size: ${isMobile ? '28px' : '36px'}; margin-bottom: 10px;">📷</div>
+              <div style="color: #E1306C; font-weight: 600; font-size: ${isMobile ? '13px' : '15px'};">Instagram</div>
+            </div>
+          </a>
+          <a href="https://open.spotify.com/user/315gsubf3hk7id74wvr6sa2ycqgi" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+            <div style="padding: ${isMobile ? '14px' : '18px'}; background: linear-gradient(135deg, rgba(29,185,84,0.12) 0%, rgba(29,185,84,0.06) 100%); border: 2px solid var(--spotify); border-radius: 8px; text-align: center; transition: all 0.3s; cursor: pointer;">
+              <div style="font-size: ${isMobile ? '28px' : '36px'}; margin-bottom: 10px;">🎵</div>
+              <div style="color: var(--spotify); font-weight: 600; font-size: ${isMobile ? '13px' : '15px'};">Spotify</div>
+            </div>
+          </a>
+        </div>
+      </div>`);
+    }
+
+    function clearTerm() {
+      const lines = Array.from(term.querySelectorAll('.line'));
+      lines.forEach((line, index) => {
+        if (index >= 4) {
+          line.remove();
+        }
+      });
+      addLine('<div class="success" style="font-size: 12px;">✓ Terminal cleared</div>');
+    }
+
+    let matrix = false;
+    function toggleMatrix() {
+      matrix = !matrix;
+      const body = document.body;
+      const matrixCanvas = document.getElementById('matrix-canvas');
+      
+      if (matrix) {
+        body.classList.add('matrix-mode');
+        matrixCanvas.classList.add('active');
+        matrixInterval = setInterval(drawMatrix, 50);
+        addLine('<div class="success">🟢 MATRIX MODE ACTIVATED<br>⚡ Digital rain enabled<br>✨ All systems enhanced<br>🎮 Welcome to the Matrix...</div>');
+      } else {
+        body.classList.remove('matrix-mode');
+        matrixCanvas.classList.remove('active');
+        clearInterval(matrixInterval);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        addLine('<div class="success">✓ Matrix mode deactivated<br>🔄 Returning to normal terminal...</div>');
+      }
+    }
+
+    document.addEventListener('click', () => {
+      if (currentInput && !isMobile) currentInput.focus();
+    });
+
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', (e) => {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+
+    // Initialize after loading screen completes
+    setTimeout(() => {
+      init();
+    }, 4000);
+  </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"19c51c69ce174dcdb09102acc2801907","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
